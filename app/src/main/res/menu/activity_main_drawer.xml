@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/item_destacados"
+            android:icon="@drawable/ic_menu_destacados"
+            android:title="@string/opcion_destacados" />
+        <item
+            android:id="@+id/item_favoritos"
+            android:icon="@drawable/ic_menu_favoritos"
+            android:title="@string/opcion_favoritos" />
+    </group>
+
+    <item android:title="@string/menu_categorias">
+        <menu>
+            <item
+                android:id="@+id/item_comida"
+                android:icon="@drawable/ic_menu_comida"
+                android:title="@string/opcion_comida" />
+            <item
+                android:id="@+id/item_ciencia"
+                android:icon="@drawable/ic_menu_ciencia"
+                android:title="@string/opcion_ciencia" />
+            <item
+                android:id="@+id/item_teatro"
+                android:icon="@drawable/ic_menu_arte"
+                android:title="@string/opcion_arte" />
+            <item
+                android:id="@+id/item_cultura"
+                android:icon="@drawable/ic_menu_cultura"
+                android:title="@string/opcion_cultura" />
+            <item
+                android:id="@+id/item_musica"
+                android:icon="@drawable/ic_menu_musica"
+                android:title="@string/opcion_musica" />
+            <item
+                android:id="@+id/item_otros"
+                android:icon="@drawable/ic_menu_otros"
+                android:title="@string/opcion_otros" />
+        </menu>
+    </item>
+
+</menu>

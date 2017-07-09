@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">EventerBeta</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="opcion_destacados">Destacados</string>
+    <string name="opcion_favoritos">Favoritos</string>
+    <string name="opcion_arte">Arte</string>
+    <string name="opcion_ciencia">Ciencia</string>
+    <string name="opcion_comida">Comida</string>
+    <string name="opcion_cultura">Cultura</string>
+    <string name="opcion_musica">Música</string>
+    <string name="opcion_otros">Otros</string>
+
+    <string name="menu_categorias">Categorías</string>
+
+    <string name="action_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
