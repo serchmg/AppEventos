@@ -6,13 +6,24 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
-import java.util.Arrays;
-import java.util.List;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,14 +34,15 @@ import java.util.List;
  * create an instance of this fragment.
  */
 public class fragDetailedView extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    JSONObject jsonResponse;
+    String url = "http://gambasoft.xyz/GetEventsBasic.php?offset=0";
+    ArrayList<EventoDetailed> lista;
 
     private OnFragmentInteractionListener mListener;
 
@@ -46,7 +58,6 @@ public class fragDetailedView extends Fragment {
      * @param param2 Parameter 2.
      * @return A new instance of fragment fragDetailedView.
      */
-    // TODO: Rename and change types and number of parameters
     public static fragDetailedView newInstance(String param1, String param2) {
         fragDetailedView fragment = new fragDetailedView();
         Bundle args = new Bundle();
@@ -64,7 +75,6 @@ public class fragDetailedView extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
-
     RecyclerView rvDetailed;
 
     @Override
@@ -77,10 +87,18 @@ public class fragDetailedView extends Fragment {
         LinearLayoutManager llm = new LinearLayoutManager(this.getActivity());
         rvDetailed.setLayoutManager(llm);
 
-        List<EventoDetailed> lista;
+        EventQuery(url);
 
-        lista = Arrays.asList(new EventoDetailed(R.drawable.ic_menu_arte, "Nombre", "Fecha",
-                true,true,"Comida","Ciencia"));
+        lista = new ArrayList<>();
+
+        /*
+        EventoDetailed evento = new EventoDetailed(R.drawable.ic_menu_arte, "Nombre", "Fecha", true, true, "Comida", "Ciencia");
+        lista.add(evento);
+
+        String temp = "lala";
+        evento = new EventoDetailed(R.drawable.ic_menu_comida, temp, "Fecha", false, true, "Ciencia", "Cultura");
+        lista.add(evento);
+        */
 
         AdaptadorRvDetailed adaptadorRvDetailed = new AdaptadorRvDetailed(lista, getContext());
         rvDetailed.setAdapter(adaptadorRvDetailed);
@@ -88,7 +106,6 @@ public class fragDetailedView extends Fragment {
         return view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
@@ -123,7 +140,45 @@ public class fragDetailedView extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    public void EventQuery(String url) {
+        Toast.makeText(getActivity().getApplicationContext(), ""+url, Toast.LENGTH_SHORT).show();
+        RequestQueue queue = Volley.newRequestQueue(getActivity().getApplicationContext());
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if (response.length()>0){
+                    AddElementsToList(response);
+                }
+            }
+        }, new Response.ErrorListener(){
+            @Override
+            public void onErrorResponse(VolleyError error) {
+            }
+        });
+        queue.add(stringRequest);
+    }
+
+    public void AddElementsToList(String response) {
+        try {
+            jsonResponse = new JSONObject(response);
+            Log.i("sizejson",""+jsonResponse.length());
+            JSONArray eventArray = jsonResponse.getJSONArray("event");
+            for(int i=0; i<eventArray.length(); i++) {
+                JSONObject jsonEvent = eventArray.getJSONObject(i);
+                String name = jsonEvent.getString("name");
+                String date = jsonEvent.getString("date");
+                EventoDetailed event = new EventoDetailed(R.drawable.ic_menu_arte, name, date,
+                        true, true, "Comida", "Ciencia");
+                lista.add(event);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        AdaptadorRvDetailed adaptadorRvDetailed = new AdaptadorRvDetailed(lista, getContext());
+        rvDetailed.setAdapter(adaptadorRvDetailed);
     }
 }

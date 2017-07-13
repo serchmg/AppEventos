@@ -1,5 +1,7 @@
 package com.example.eventerbeta;
 
+import android.widget.TextView;
+
 /**
  * Created by Serch on 6/23/2017.
  */
