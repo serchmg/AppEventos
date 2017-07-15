@@ -83,23 +83,16 @@ public class fragDetailedView extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_frag_detailed_view, container, false);
 
+        //Start recycle view
         rvDetailed = (RecyclerView)view.findViewById(R.id.rvDetailed);
         LinearLayoutManager llm = new LinearLayoutManager(this.getActivity());
         rvDetailed.setLayoutManager(llm);
 
+        //Get events list
         EventQuery(url);
-
         lista = new ArrayList<>();
 
-        /*
-        EventoDetailed evento = new EventoDetailed(R.drawable.ic_menu_arte, "Nombre", "Fecha", true, true, "Comida", "Ciencia");
-        lista.add(evento);
-
-        String temp = "lala";
-        evento = new EventoDetailed(R.drawable.ic_menu_comida, temp, "Fecha", false, true, "Ciencia", "Cultura");
-        lista.add(evento);
-        */
-
+        //Place events on adapter
         AdaptadorRvDetailed adaptadorRvDetailed = new AdaptadorRvDetailed(lista, getContext());
         rvDetailed.setAdapter(adaptadorRvDetailed);
 
@@ -170,8 +163,12 @@ public class fragDetailedView extends Fragment {
                 JSONObject jsonEvent = eventArray.getJSONObject(i);
                 String name = jsonEvent.getString("name");
                 String date = jsonEvent.getString("date");
-                EventoDetailed event = new EventoDetailed(R.drawable.ic_menu_arte, name, date,
-                        true, true, "Comida", "Ciencia");
+                String organizer = jsonEvent.getString("organizer");
+                String imageUrl = jsonEvent.getString("image_url");
+                int category1 = jsonEvent.getInt("category1");
+                int category2 = jsonEvent.getInt("category2");
+                EventoDetailed event = new EventoDetailed(imageUrl, name, date, organizer,
+                        true, true, category1, category2);
                 lista.add(event);
             }
         } catch (JSONException e) {

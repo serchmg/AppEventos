@@ -41,10 +41,10 @@ public class AdaptadorRv extends RecyclerView.Adapter<AdaptadorRv.EventoViewHold
         holder.fecha.setText(listaEvento.get(position).getFecha());
 
         //Con esta cosa hacemos que la figura este redonda, no usar xml para esto, usar imagenes png
-        Picasso.with(context).load(listaEvento.get(position).getImagenEvento()) //este carga la imagen, aqui se pega el link de la imagen
+        Picasso.with(context).load("http://res.cloudinary.com/dvvvmzy0p/image/upload/v1500081766/one_piece.png")
                 .error(R.drawable.ic_menu_favoritos)                       //este carga otra imagen, cuando hay error en la primera
                 .transform(new CircleTransformation())           //esta linea redondea la imagen
-                .placeholder(R.mipmap.one_piece)         //este pone imagen antes de cargar la imagen buena
+                .placeholder(R.mipmap.ic_launcher)         //este pone imagen antes de cargar la imagen buena
                 .into(holder.imagenEvento);                      //aqui le ponen la imagen
     }
 

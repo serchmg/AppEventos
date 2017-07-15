@@ -40,6 +40,15 @@
                 android:paddingLeft="10dp"
                 android:id="@+id/tvFecha"/>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Organizador"
+                android:layout_toRightOf="@+id/imagen"
+                android:layout_below="@id/tvNombreEvento"
+                android:paddingLeft="10dp"
+                android:id="@+id/tvOrganizer"/>
+
         </LinearLayout>
 
         <LinearLayout

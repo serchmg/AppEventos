@@ -7,19 +7,21 @@ import android.widget.TextView;
  */
 
 class EventoDetailed {
-    int imagenEvento;
+    String imagenEvento;
     String nombreEvento;
     String fechaEvento;
+    String organizer;
     boolean favorito;
     boolean destacado;
-    String categoria1;
-    String categoria2;
+    int categoria1;
+    int categoria2;
 
-    public EventoDetailed(int imagenEvento, String nombreEvento, String fechaEvento,
-                          boolean favorito, boolean destacado, String categoria1,
-                          String categoria2) {
+    public EventoDetailed(String imagenEvento, String nombreEvento, String fechaEvento, String organizer,
+                          boolean favorito, boolean destacado, int categoria1,
+                          int categoria2) {
         this.imagenEvento = imagenEvento;
         this.nombreEvento = nombreEvento;
+        this.organizer = organizer;
         this.fechaEvento = fechaEvento;
         this.favorito = favorito;
         this.destacado = destacado;
@@ -27,7 +29,7 @@ class EventoDetailed {
         this.categoria2 = categoria2;
     }
 
-    public void setImagenEvento(int imagenEvento) {
+    public void setImagenEvento(String imagenEvento) {
         this.imagenEvento = imagenEvento;
     }
 
@@ -47,15 +49,15 @@ class EventoDetailed {
         this.destacado = destacado;
     }
 
-    public void setCategoria1(String categoria1) {
+    public void setCategoria1(int categoria1) {
         this.categoria1 = categoria1;
     }
 
-    public void setCategoria2(String categoria2) {
+    public void setCategoria2(int categoria2) {
         this.categoria2 = categoria2;
     }
 
-    public int getImagenEvento() {
+    public String getImagenEvento() {
         return imagenEvento;
     }
 
@@ -75,11 +77,19 @@ class EventoDetailed {
         return destacado;
     }
 
-    public String getCategoria1() {
+    public int getCategoria1() {
         return categoria1;
     }
 
-    public String getCategoria2() {
+    public int getCategoria2() {
         return categoria2;
+    }
+
+    public String getOrganizer() {
+        return organizer;
+    }
+
+    public void setOrganizer(String organizer) {
+        this.organizer = organizer;
     }
 }
