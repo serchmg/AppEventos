@@ -7,6 +7,7 @@ import android.widget.TextView;
  */
 
 class EventoDetailed {
+    int id;
     String imagenEvento;
     String nombreEvento;
     String fechaEvento;
@@ -16,9 +17,10 @@ class EventoDetailed {
     int categoria1;
     int categoria2;
 
-    public EventoDetailed(String imagenEvento, String nombreEvento, String fechaEvento, String organizer,
+    public EventoDetailed(int id, String imagenEvento, String nombreEvento, String fechaEvento, String organizer,
                           boolean favorito, boolean destacado, int categoria1,
                           int categoria2) {
+        this.id = id;
         this.imagenEvento = imagenEvento;
         this.nombreEvento = nombreEvento;
         this.organizer = organizer;
@@ -27,6 +29,14 @@ class EventoDetailed {
         this.destacado = destacado;
         this.categoria1 = categoria1;
         this.categoria2 = categoria2;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setImagenEvento(String imagenEvento) {

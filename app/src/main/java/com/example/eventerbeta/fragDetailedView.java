@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewDebug;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
@@ -96,6 +97,17 @@ public class fragDetailedView extends Fragment {
         AdaptadorRvDetailed adaptadorRvDetailed = new AdaptadorRvDetailed(lista, getContext());
         rvDetailed.setAdapter(adaptadorRvDetailed);
 
+        rvDetailed.addOnItemTouchListener(
+                new RecyclerItemClickListener(getContext(), new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        Toast.makeText(getContext(),
+                        "Tocado " + String.valueOf(lista.get(position).getId()),
+                        Toast.LENGTH_LONG).show();
+                    }
+                })
+        );
+
         return view;
     }
 
@@ -161,13 +173,14 @@ public class fragDetailedView extends Fragment {
             JSONArray eventArray = jsonResponse.getJSONArray("event");
             for(int i=0; i<eventArray.length(); i++) {
                 JSONObject jsonEvent = eventArray.getJSONObject(i);
+                int id = jsonEvent.getInt("id");
                 String name = jsonEvent.getString("name");
                 String date = jsonEvent.getString("date");
                 String organizer = jsonEvent.getString("organizer");
                 String imageUrl = jsonEvent.getString("image_url");
                 int category1 = jsonEvent.getInt("category1");
                 int category2 = jsonEvent.getInt("category2");
-                EventoDetailed event = new EventoDetailed(imageUrl, name, date, organizer,
+                EventoDetailed event = new EventoDetailed(id, imageUrl, name, date, organizer,
                         true, true, category1, category2);
                 lista.add(event);
             }
